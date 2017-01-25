@@ -94,6 +94,11 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             }
         }
         
+        // Variables used to store random number to assign player into team randomly
+        var randomTeam1 = 1
+        var randomTeam2 = 2
+        var randomTeam3 = 3
+        
         // Assign players with experience into the three teams first
         while playersWithExperience.count > 0 {
             // To ensure the three teams to have even experienced players.
@@ -102,7 +107,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             // Pick out a random player and place him/her into one of the three teams, remove it from the temporary array then
             let randomPlayer1 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
-            let randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+            randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
             
             switch randomTeam1 {
                 case 0: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer1], intoTeam: "Dragon")
@@ -113,39 +118,43 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             playersWithExperience.remove(at: randomPlayer1)
             
-            // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
-            let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
+            if playersWithExperience.count > 0 {
+                // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
+                let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
-            var randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            while randomTeam2 == randomTeam1 {
                 randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                while randomTeam2 == randomTeam1 {
+                    randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                }
+            
+                switch randomTeam2 {
+                    case 0: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Dragon")
+                    case 1: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Sharks")
+                    case 2: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Raptors")
+                    default: print("Unexpected error")
+                }
+            
+                playersWithExperience.remove(at: randomPlayer2)
             }
             
-            switch randomTeam2 {
-                case 0: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Dragon")
-                case 1: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Sharks")
-                case 2: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer2], intoTeam: "Raptors")
-                default: print("Unexpected error")
-            }
+            if playersWithExperience.count > 0 {
+                // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
+                let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
-            playersWithExperience.remove(at: randomPlayer2)
-            
-            // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
-            let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
-            
-            var randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
                 randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            }
+                while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
+                    randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                }
             
-            switch randomTeam3 {
-                case 0: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Dragon")
-                case 1: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Sharks")
-                case 2: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Raptors")
-                default: print("Unexpected error")
-            }
+                switch randomTeam3 {
+                    case 0: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Dragon")
+                    case 1: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Sharks")
+                    case 2: assignPlayer(ofPlayerName: playersWithExperience[randomPlayer3], intoTeam: "Raptors")
+                    default: print("Unexpected error")
+                }
             
-            playersWithExperience.remove(at: randomPlayer3)
+                playersWithExperience.remove(at: randomPlayer3)
+            }
         }
         
         // Assign players without experience into the three teams then
@@ -156,7 +165,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             // Pick out a random player and place him/her into one of the three teams, remove it from the temporary array then
             let randomPlayer1 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
-            let randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+            randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
             
             switch randomTeam1 {
                 case 0: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer1], intoTeam: "Dragon")
@@ -167,39 +176,43 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             playersWithOutExperience.remove(at: randomPlayer1)
             
-            // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
-            let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
+            if playersWithOutExperience.count > 0 {
+                // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
+                let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
-            var randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            while randomTeam2 == randomTeam1 {
                 randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                while randomTeam2 == randomTeam1 {
+                    randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                }
+        
+                switch randomTeam2 {
+                    case 0: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Dragon")
+                    case 1: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Sharks")
+                    case 2: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Raptors")
+                    default: print("Unexpected error")
+                }
+            
+                playersWithOutExperience.remove(at: randomPlayer2)
             }
             
-            switch randomTeam2 {
-                case 0: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Dragon")
-                case 1: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Sharks")
-                case 2: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer2], intoTeam: "Raptors")
-                default: print("Unexpected error")
-            }
+            if playersWithOutExperience.count > 0 {
+                // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
+                let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
-            playersWithOutExperience.remove(at: randomPlayer2)
-            
-            // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
-            let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
-            
-            var randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
                 randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
-            }
+                while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
+                    randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                }
             
-            switch randomTeam3 {
-                case 0: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Dragon")
-                case 1: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Sharks")
-                case 2: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Raptors")
-                default: print("Unexpected error")
-            }
+                switch randomTeam3 {
+                    case 0: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Dragon")
+                    case 1: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Sharks")
+                    case 2: assignPlayer(ofPlayerName: playersWithOutExperience[randomPlayer3], intoTeam: "Raptors")
+                    default: print("Unexpected error")
+                }
             
-            playersWithOutExperience.remove(at: randomPlayer3)
+                playersWithOutExperience.remove(at: randomPlayer3)
+            }
         }
         
         // To check whether all teams' average heights are within 1.5 inches of each other
@@ -243,4 +256,4 @@ print("Average height of team Dragon = \(averageHeight(players: teamDragon))")
 print("Average height of team Sharks = \(averageHeight(players: teamSharks))")
 print("Average height of team Raptors = \(averageHeight(players: teamRaptors))")
 
-// Project 1 Complete
+// Project 1 Complele
