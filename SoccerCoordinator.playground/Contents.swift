@@ -65,7 +65,7 @@ func assignPlayer(ofPlayerName player: String, intoTeam team: String) {
 }
 
 // The function to sort players into the three teams by their experience and height
-func sortPlayersIntoThreeTeams(players: [String: [String]]) {
+func sortPlayersIntoThreeTeams(fromPlayers players: [String: [String]]) {
     // The two arrays below will used as temporary place to divide players into two groups: with experience or without experience
     // Only the name of the player will be stored in the two arrays
     var playersWithExperience: [String] = []
@@ -95,9 +95,9 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
         }
         
         // Variables used to store random number to assign player into team randomly
-        var randomTeam1 = 1
-        var randomTeam2 = 2
-        var randomTeam3 = 3
+        var randomTeam1: Int = 1
+        var randomTeam2: Int = 2
+        var randomTeam3: Int = 3
         
         // Assign players with experience into the three teams first
         while playersWithExperience.count > 0 {
@@ -105,7 +105,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             // For each loop, three players will be drawn out from the array randomly, and evenly put into the three teams.
             
             // Pick out a random player and place him/her into one of the three teams, remove it from the temporary array then
-            let randomPlayer1 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
+            let randomPlayer1: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
             randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
             
@@ -120,7 +120,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             if playersWithExperience.count > 0 {
                 // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
-                let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
+                let randomPlayer2: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
                 randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
                 while randomTeam2 == randomTeam1 {
@@ -139,7 +139,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             if playersWithExperience.count > 0 {
                 // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
-                let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
+                let randomPlayer3: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithExperience.count)
             
                 randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
                 while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
@@ -163,7 +163,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             // For each loop, three players will be drawn out from the array randomly, and evenly put into the three teams.
             
             // Pick out a random player and place him/her into one of the three teams, remove it from the temporary array then
-            let randomPlayer1 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
+            let randomPlayer1: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
             randomTeam1 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
             
@@ -178,7 +178,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             if playersWithOutExperience.count > 0 {
                 // Pick out another random player and place him/her into the other two teams, remove it from the temporary array then
-                let randomPlayer2 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
+                let randomPlayer2: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
                 randomTeam2 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
                 while randomTeam2 == randomTeam1 {
@@ -197,7 +197,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
             
             if playersWithOutExperience.count > 0 {
                 // Pick out a random player again and place him/her into the last team, remove it from the temporary array then
-                let randomPlayer3 = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
+                let randomPlayer3: Int = GKRandomSource.sharedRandom().nextInt(upperBound: playersWithOutExperience.count)
             
                 randomTeam3 = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
                 while (randomTeam3 == randomTeam1 || randomTeam3 == randomTeam2) {
@@ -229,7 +229,7 @@ func sortPlayersIntoThreeTeams(players: [String: [String]]) {
 }
 
 // Run the function to sort player in players into the three teams
-sortPlayersIntoThreeTeams(players: players)
+sortPlayersIntoThreeTeams(fromPlayers: players)
 
 // Variables to store the letters to guardian
 var letters: [String] = []
